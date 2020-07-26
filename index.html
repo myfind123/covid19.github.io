@@ -1,44 +1,238 @@
-<html>
-<script src='https://d3js.org/d3.v5.min.js'></script>
-<style> rect {fill: lightblue; stroke: black; }</style>
-<body>
-<svg width=300 height=300>
-</svg>
-<script>
-var data = [4,8,15,16,23,42];
+<!DOCTYPE html>
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<meta charset="utf-8">
 
-var margin = 50;
-var width = 200;
-var height = 200;
-
-var x = d3.scaleBand().domain([0,1,2,3,4,5]).range([0,width]);
-var y = d3.scaleLinear().domain([0,42]).range([height,0]);
+<title>Effects of COVID-19 Pandemic on Employment</title>
+<p>Effects of COVID-19 Pandemic on Employment</p>
 
 
-d3.select("svg")
-    .attr("width",width + 2*margin)
-    .attr("height",height + 2*margin)
-    .append("g")
-    .attr("transform","translate("+margin+","+margin+")")
-    .selectAll("rect")
-	.data(data)
-    .enter().append("rect")
-    .attr("width",x.bandwidth())
-    .attr("height",function(d) { return height - y(d); })
-    .attr("x",function(d,i) { return x(i); })
-    .attr("y",function(d) { return y(d); });
+
+<style>
+
+    #my_report {
+        max-width: 500px;
+        margin: 0 auto;
+        background: white;
+        padding: 10px;
+    }
+
+    a { /* Navigation button style*/
+        text-decoration: none;
+        display: inline-block;
+        padding: 8px 16px;
+    }
+
+    .previous {
+        background-color: #f1f1f1;
+        color: black;
+    }
+
+    .next {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .round {
+        border-radius: 50%;
+    }
 
 
-d3.select("svg").append("g")
- .attr("transform","translate("+margin+","+margin+")")
- .call(d3.axisLeft(y));
+    /*
+            a:hover {
+                background-color: #ddd;
+                color: black;
+            }*/
 
 
-d3.select("svg").append("g")
- .attr("transform","translate("+margin+","+(height+margin)+")")
- .call(d3.axisBottom(x));
 
-    
+    /*
+        ul.tab {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }*/
+    /* Style the links inside the list items */
+    /*  ul.tab li a {
+                display: inline-block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                transition: 0.3s;
+                font-size: 17px;
+            }
+
+            ul.tab li {
+                float: left;
+            }*/
+    /* Float the list items side by side
+                ul.tab li a:hover {
+                    background-color: #ddd;
+                }
+                Change background color of links on hover
+                ul.tab li a:focus, .active {
+                    background-color: #ccc;
+                }*/
+    /* Create an active/current tablink class */
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        margin: auto;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    #tooltip {
+        opacity: 0;
+        position: relative;
+        text-align: center;
+        width: 60px;
+        height: 40px;
+        background: lightYellow;
+        border: 0px;
+    }
+</style>
+
+
+<html><body>
+    <div id="tooltip" opacity=0></div>
+    <a href="#" class="previous">&laquo; Previous</a>
+    <a href="#" class="next">Next &raquo;</a>
+    <a href="#" class="previous round">&#8249;</a>
+    <a href="#" class="next round">&#8250;</a>
+    <div id="my_report"></div>
+
+
+    <script>
+
+        // set the dimensions and margins of the graph
+       var margin = { top: 10, right: 30, bottom: 30, left: 60 },
+            width = 800 - margin.left - margin.right,
+            height = 800 - margin.top - margin.bottom;
+          //       width = 800,
+           // height = 800 ;
+        // append the svg object to the body of the page
+        var svg = d3.select("#my_report")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+           .attr("transform",
+               "translate(" + margin.left + "," + margin.top + ")");
+
+        var addTooltipDiv = function () {
+            var tooltipDiv = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+            return tooltipDiv;
+        };
+        //Read the data
+        //  d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
+
+        d3.csv("uer.csv",
+
+
+            // When reading the csv, I must format variables:
+            function (d) {
+                return { Year: d3.timeParse("%Y-%m-%d")(d.Year), UER: d.UER }
+            },
+
+            // define the 1st line
+  
+
+            // Now I can use this dataset:
+            function (data) {
+
+                var tooltip = d3.select("#tooltip");
+                // Add X axis --> it is a date format
+                var xaxis = d3.scaleTime()
+                    .domain(d3.extent(data, function (d) { return d.Year; }))
+                    .range([0, width]);
+                svg.append("g")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(xaxis));
+
+                // Add Y axis
+                var yaxis = d3.scaleLinear()
+                    .domain([0, d3.max(data, function (d) { return +d.UER; })])
+                    .range([height, 0]);
+                svg.append("g")
+                    .call(d3.axisLeft(yaxis));
+
+                var bisect = d3.bisector(function (d) { return d.y; }).left;
+                var valueline2 = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.WHITES); });
+
+                       var valueline = d3.line() .x(function(d) { return xaxis(d.Year); })  .y(function(d) { return yaxis(d.UER); });
+            // define the 2nd line
+                  
+
+
+                // Add the line
+               /* svg.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "steelblue")
+                    .attr("stroke-width", 3)
+                    .attr("d", d3.line()
+                        .x(function (d) { return xaxis(d.Year) })
+                        .y(function (d) { return yaxis(d.UER) }))*/
+
+                   svg.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "red")
+                    .attr("stroke-width", 3)
+                    .attr("d", valueline)
+
+                   /* svg.append("path")
+                    .datum(data)
+                    .attr("fill", "none")
+                    .attr("stroke", "steelblue")
+                    .attr("stroke-width", 3)
+                    .attr("d", valueline)
+                    */
+  // Add the valueline2 path.
+               
+
+                 /*   .on("mouseover", function (d) {
+
+                        var x0 = yaxis.invert(d3.mouse(this)[0]);
+                        var i = bisect(data, x0, 1);
+                        console.log(d);
+                        console.log(d3.mouse(this)[0]);
+
+                      //  console.log(d[i]);
+
+                        tooltip.style("opacity", 1)
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY) + "px")
+                            .html(d .UER);
+                    })
+                    .on("mouseout", function () { tooltip.style("opacity", 0) })*/
+
+                svg.selectAll(".dot")
+                    .data(data)
+                    .enter()
+                    .append("circle")
+                    .attr("r", 3.5)
+                    .attr("cx", function (d) { return xaxis(d.Year) })
+                    .attr("cy", function (d) { return yaxis(d.UER) })
+                  .on("mouseover", function (d) {
+                             tooltip.style("opacity", 1)
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY) + "px")
+                            .html(d .UER);
+                    })
+                    .on("mouseout", function () { tooltip.style("opacity", 0) })
+
+            })
+
     </script>
 </body>
 </html>
