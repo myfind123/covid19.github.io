@@ -1,20 +1,72 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
+
+
+
+<div class="header">
+    <h1>Effects of Major EVENTS on Employment in EthinicityWise</h1>
+</div>
+
 <meta charset="utf-8">
 
-<title>Effects of COVID-19 Pandemic on Employment</title>
-<p>Effects of COVID-19 Pandemic on Employment</p>
+<title>Effects of Major EVENTES on Employment</title>
+<p>Effects of Major EVENTES on Employment</p>
 
 
 
 <style>
 
+    .header {
+  padding: 5px;
+  text-align: center;
+  background: white;
+}
+
+.header h1 {
+  font-size: 50px;
+}
+
+p {
+  font-size: 14px;
+}
+
+#leftbox { 
+                float:left;  
+                background:Red; 
+                width:25%; 
+                height:280px; 
+                        background: white;
+        padding: 10px;
+            }
+    my_report1 {
+        float: left;
+         background: green;
+         max-width: 2000px;
+        height: 2000px;
+    }
+
+
+   /* #leftSidePageInfo {
+        background-color: lightblue;
+        overflow: auto;
+        width: 250px;
+        height: 480px;
+        float: left;
+        margin: auto;
+        position: relative;
+    }
+       */
+    
     #my_report {
-        max-width: 500px;
-        margin: 0 auto;
+        max-width: 2000px;
+     //   margin: 0 auto;
         background: white;
         padding: 10px;
+        position: relative;
+          float: left;
+         max-width: 2000px;
+        height: 2000px;
     }
 
     a { /* Navigation button style*/
@@ -37,12 +89,12 @@
         border-radius: 50%;
     }
 
+    .line {
+  fill: none;
+  stroke-width: 4px;
+  }
 
-    /*
-            a:hover {
-                background-color: #ddd;
-                color: black;
-            }*/
+  
 
 
 
@@ -88,6 +140,10 @@
         border-top: none;
     }
 
+    .axisRed line {
+        stroke: red;
+    }
+
     #tooltip {
         opacity: 0;
         position: relative;
@@ -97,34 +153,218 @@
         background: lightYellow;
         border: 0px;
     }
+
+    #desplegable {
+        left: 10px;
+        top: 5px;
+    }
+    .statelist {
+  background-color: green;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+    .statedropdown-list {
+        display: none;
+        position: absolute;
+        background-color: green;
+        min-width: 100px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .alltimelist {
+        background-color: deepskyblue ;
+        color: white;
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .allTimedropdown-list {
+        display: none;
+        position: absolute;
+        background-color: deepskyblue ;
+        min-width: 100px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    .axis-label {
+  font-size: 2em;
+  fill: #8E8883;
+}
+    .tick text {
+  font-size: 1.4rem;
+  fill: #635F5D;
+}
+
+.tick line {
+  stroke: #C0C0BB;
+}
+.myButton {
+	box-shadow: 3px 4px 0px 0px #1564ad;
+	background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+   background-color:#378de5;
+	border-radius:5px;
+	border:1px solid #337bc4;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	font-weight:bold;
+	padding:12px 44px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
+     padding: 15px 32px;
+}
+    .myButton:hover {
+        background: linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+        background-color: #378de5;
+    }
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 </style>
 
 
-<html><body>
+<html>
+<body>
     <div id="tooltip" opacity=0></div>
     <a href="#" class="previous">&laquo; Previous</a>
     <a href="#" class="next">Next &raquo;</a>
     <a href="#" class="previous round">&#8249;</a>
     <a href="#" class="next round">&#8250;</a>
+  
+    <div id="leftbox">
+        <div class="dropdown">
+            <select class="statelist" id="stateSelectButton"><option class="statedropdown-list" value="State" selected>All States</option></select>
+            <select class="alltimelist" id="allTimeList"><option class="allTimedropdown-list" value="All time" selected>All time</option></select>
+            <input class="button" type="button" value="dot.Com Crash Effect" id="dotComCrash">
+            <input type="button" class="button" value="Housing Market Effect" id="housingCrash">
+            <input type="button" class="button" value="Covid Pandemic Effect" id="pandemicCrash">
+        </div>
+        <div id="Infobox">
+            <h3>!DataHeader</h3>
+            <p>
+                !DataContent
+
+            </p>
+
+            <p>
+                </br></br>
+                <i>*!DataFooter</i> <a> !DataReference.</a>
+            </p>
+
+            <p></p>
+        </div>
+    </div>
     <div id="my_report"></div>
+    <div>
+        <svg id="my_dataviz" height=300 width=450></svg>
+    </div>
+
 
 
     <script>
 
         // set the dimensions and margins of the graph
-       var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-            width = 800 - margin.left - margin.right,
+        //   var margin = { top: 30, right: 30, bottom: 50, left: 60 },
+        var margin = { top: 30, right: 30, bottom: 50, left: 60 },
+            width = 1400 - margin.left - margin.right,
             height = 800 - margin.top - margin.bottom;
-          //       width = 800,
-           // height = 800 ;
+        var labHeight = 50;
+        var labRadius = 10;
+        var graphMap = new Object(); // or just {}
+        var graphStatusMap = new Object();
+        var colorMap = new Object();
+
+
+        document.getElementById("dotComCrash").addEventListener("click", function () {
+               updateLeftSideInfoBar("dotComCrash");
+            showCrashGraph("dotComCrash");
+         
+        }, false);
+        document.getElementById("housingCrash").addEventListener("click", function () {
+               updateLeftSideInfoBar("dotComCrash");
+            showCrashGraph("housingCrash");
+        }, false);
+
+        document.getElementById("pandemicCrash").addEventListener("click", function () {
+               updateLeftSideInfoBar("dotComCrash");
+            showCrashGraph("pandemicCrash");
+        }, false);
+
         // append the svg object to the body of the page
+        // color
+        c = d3.scaleOrdinal()
+            .domain(["male", "female"])
+            .range(["#a6cee3", "#fb9a99"]);
+
+        const annotations = [
+            {
+                note: {
+                    label: "Here is the annotation label",
+                    title: "Annotation title"
+                },
+                x: margin.left,
+                y: margin.top,
+                dy: margin.left + 10,
+                dx: margin.top + 10
+            }
+        ]
+
+
+        d3.csv("IndexValue.csv", function (error, data) {
+
+            var selectedState = "";
+            d3.select("#stateSelectButton").selectAll("myOptions")
+                .data(data)
+                .enter()
+                .append("option")
+                .attr("value", function (d) { return d.state; })
+                .text(function (d) { return d.state; });
+
+            d3.select("#stateSelectButton")
+                .on("change", function (d) {
+                    selectedState = d3.select(this).property("value");
+                    d3.select("#id1").remove();
+                    d3.select("#xaxis").selectAll('.tick').remove();
+                    d3.select("#yaxis").selectAll('.tick').remove();
+                    d3.select("#yaxis").remove();
+                    d3.selectAll("#dotid").remove();
+
+                    d3.csv("UERStatewiseData.csv", function (data) {
+                        showGraphState(selectedState, data);
+                    })
+
+                });
+
+        });
+
         var svg = d3.select("#my_report")
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-           .attr("transform",
-               "translate(" + margin.left + "," + margin.top + ")");
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
 
         var addTooltipDiv = function () {
             var tooltipDiv = d3.select("body").append("div")
@@ -132,106 +372,386 @@
                 .style("opacity", 0);
             return tooltipDiv;
         };
-        //Read the data
-        //  d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
+     //     d3.csv("UERStatewise-4.csv", function (data) {
+        d3.csv("UERStatewiseData.csv", function (data) {
+            showGraphState("All States", data);
+        })
 
-        d3.csv("uer.csv",
+        function clearExistingGraph() {
+            d3.select("#id1").remove();
+            d3.select("#id2").remove();
+            d3.select("#id3").remove();
+            d3.select("#id4").remove();
+            d3.select("#id5").remove();
 
+            d3.select("#xaxis").selectAll('.tick').remove();
+            d3.select("#yaxis").selectAll('.tick').remove();
+            d3.select("#yaxis").remove();
+            d3.select("#xaxis").remove();
+            d3.selectAll("#dotid").remove();
+        }
 
-            // When reading the csv, I must format variables:
-            function (d) {
-                return { Year: d3.timeParse("%Y-%m-%d")(d.Year), UER: d.UER }
-            },
+        function updateLeftSideInfoBar(inputvalue) {
 
-            // define the 1st line
-  
+            var infoText =  "Paragraph changed!";
+            if (inputvalue == "dotComCrash") {
+                
+            }
+            else if (inputvalue == "housingCrash") {
 
-            // Now I can use this dataset:
-            function (data) {
-                console.log(data);
-                var tooltip = d3.select("#tooltip");
-                // Add X axis --> it is a date format
-                var xaxis = d3.scaleTime()
-                    .domain(d3.extent(data, function (d) { return d.Year; }))
+            }
+
+            else if (inputvalue == "pandemicCrash") {
+
+            }
+            document.getElementById("Infobox").innerHTML =infoText
+            
+         
+
+        }
+        function showCrashGraph(inputvalue) {
+
+            var filename = "";
+
+            if (inputvalue == "dotComCrash")
+                filename = "DotComCrashUER.csv";
+            else if (inputvalue == "housingCrash")
+                filename = "housingCrashUER.csv";
+            else if (inputvalue == "pandemicCrash")
+                filename = "pandemicUER.csv";
+
+            clearExistingGraph();
+            //  var uerData = new Object();
+            d3.csv(filename, function (data) {
+
+                var statename = "All States";
+                var uerData = data.map(function (d) {
+                    return {
+                        Year: d3.timeParse("%Y")(d.Year), UER: d[statename]
+                    }
+                });
+
+                xaxis = d3.scaleTime()
+                    .domain(d3.extent(uerData, function (d) { return d.Year; }))
                     .range([0, width]);
+
                 svg.append("g")
                     .attr("transform", "translate(0," + height + ")")
+                    .attr("id", "xaxis")
+                    .style("font", "20px times")
                     .call(d3.axisBottom(xaxis));
 
                 // Add Y axis
-                var yaxis = d3.scaleLinear()
-                    .domain([0, d3.max(data, function (d) { return +d.UER; })])
-                    .range([height, 0]);
+                yaxis = d3.scaleLinear()
+                    //  .domain([0, d3.max(stateyear, function (d) { return +d.UER; })])
+                    .domain([-1, 18])
+                    .range([height, 0])
+
+
+
                 svg.append("g")
+                    .attr("id", "yaxis")
+                    .style("font", "20px times")
                     .call(d3.axisLeft(yaxis));
 
-                var bisect = d3.bisector(function (d) { return d.y; }).left;
-                var valueline2 = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.WHITES); });
+                // text label for the x axis
+                svg.append("text")
+                    .attr('class', 'axis-label')
+                    .attr("transform",
+                        "translate(" + (width / 2) + " ," +
+                        (height + margin.top + 20) + ")")
+                    .style("text-anchor", "middle")
+                    .text("Date");
 
-                       var valueline = d3.line() .x(function(d) { return xaxis(d.Year); })  .y(function(d) { return yaxis(d.UER); });
-            // define the 2nd line
-                  
+                console.log(uerData);
+                // text label for the y axis
+                svg.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr('class', 'axis-label')
+                    .attr("y", 0 - margin.left)
+                    .attr("x", 0 - (height / 2))
+                    .attr("dy", "1em")
+                    .style("text-anchor", "middle")
+                    .text("UnEmployment Rate %");
+
+                var valueline3 = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.UER); });
 
 
-                // Add the line
-               /* svg.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("stroke", "steelblue")
-                    .attr("stroke-width", 3)
-                    .attr("d", d3.line()
-                        .x(function (d) { return xaxis(d.Year) })
-                        .y(function (d) { return yaxis(d.UER) }))*/
 
-                   svg.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("stroke", "red")
-                    .attr("stroke-width", 3)
-                    .attr("d", valueline)
+                svg.append("path")
+                    .datum(uerData)
+                    .attr("class", "line")
+                    .attr("stroke", "black")
+                    .attr("id", "id1")
+                    .attr("d", valueline3);
 
-                   /* svg.append("path")
-                    .datum(data)
-                    .attr("fill", "none")
-                    .attr("stroke", "steelblue")
-                    .attr("stroke-width", 3)
-                    .attr("d", valueline)
-                    */
-  // Add the valueline2 path.
-               
 
-                 /*   .on("mouseover", function (d) {
 
-                        var x0 = yaxis.invert(d3.mouse(this)[0]);
-                        var i = bisect(data, x0, 1);
-                        console.log(d);
-                        console.log(d3.mouse(this)[0]);
-
-                      //  console.log(d[i]);
+                svg.selectAll(".dot")
+                    .data(uerData)
+                    .enter()
+                    .append("circle")
+                    .attr("r", 10)
+                    .attr("color", "darkgreen")
+                    .attr("cx", function (d) { return xaxis(d.Year) })
+                    .attr("cy", function (d) { return yaxis(d.UER) })
+                    .attr("id", "dotid")
+                    .on("mousemove", function (d) {
 
                         tooltip.style("opacity", 1)
                             .style("left", (d3.event.pageX) + "px")
                             .style("top", (d3.event.pageY) + "px")
-                            .html(d .UER);
+                            .html(d.UER)
                     })
-                    .on("mouseout", function () { tooltip.style("opacity", 0) })*/
+                    .on("mouseout", function () { tooltip.style("opacity", 0) });
+            }
 
-                svg.selectAll(".dot")
-                    .data(data)
-                    .enter()
-                    .append("circle")
-                    .attr("r", 3.5)
-                    .attr("cx", function (d) { return xaxis(d.Year) })
-                    .attr("cy", function (d) { return yaxis(d.UER) })
-                  .on("mouseover", function (d) {
-                             tooltip.style("opacity", 1)
-                            .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY) + "px")
-                            .html(d .UER);
-                    })
-                    .on("mouseout", function () { tooltip.style("opacity", 0) })
+            )
+        }
+        function showGraphState(statename, data1) {
 
-            })
+            var tooltip = d3.select("#tooltip");
+            var stateyear = data1.map(function (d) {
+                return {
+                    Year: d3.timeParse("%Y")(d.Year), UER: d[statename]
+                }
+            });
+            xaxis = d3.scaleTime()
+                .domain(d3.extent(stateyear, function (d) { return d.Year; }))
+                .range([0, width]);
+
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .attr("id", "xaxis")
+                .style("font", "20px times")
+                .call(d3.axisBottom(xaxis));
+
+            // Add Y axis
+            yaxis = d3.scaleLinear()
+                //  .domain([0, d3.max(stateyear, function (d) { return +d.UER; })])
+                .domain([-1, 18])
+                .range([height, 0])
+
+            svg.append("g")
+                .attr("id", "yaxis")
+                .style("font", "20px times")
+                .call(d3.axisLeft(yaxis));
+
+            // text label for the x axis
+            svg.append("text")
+                .attr('class', 'axis-label')
+                .attr("transform",
+                    "translate(" + (width / 2) + " ," +
+                    (height + margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .text("Date");
+
+            // text label for the y axis
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr('class', 'axis-label')
+                .attr("y", 0 - margin.left)
+                .attr("x", 0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("UnEmployment Rate %");
+            var valueline3 = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.UER); });
+
+            svg.append("path")
+                .datum(stateyear)
+                .transition()
+                .duration(1000)
+                .attr("class", "line")
+                .attr("stroke", "black")
+                .attr("id", "id1")
+                .attr("d", valueline3);
+
+            //     if (eithinicityGraph == "Yes") {
+            if (statename == "All States") {
+
+                var raceWisedata = data1.map(function (d) {
+                    return {
+                        Year: d3.timeParse("%Y")(d.Year), Black: d.Black, White: d.White, Latino: d.Latino, Asian: d.Asian
+                    }
+                });
+
+                var blackGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Black); });
+                var whiteGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.White); });
+                var latinoGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Latino); });
+                var asianGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Asian); });
+
+                var graph1 = svg.append("path")
+                    .datum(raceWisedata)
+                    .attr("class", "line")
+                    .attr("stroke", "lightblue")
+                    .attr("id", "id2")
+                    .attr("d", blackGraphLine);
+
+
+                var graph2 = svg.append("path")
+                    .datum(raceWisedata)
+                    .attr("class", "line")
+                    .attr("stroke", "lightgreen")
+                    .attr("id", "id3")
+                    .attr("d", whiteGraphLine);
+
+                var graph3 = svg.append("path")
+                    .datum(raceWisedata)
+                    .attr("class", "line")
+                    .attr("stroke", "lightyellow")
+                    .attr("id", "id4")
+                    .attr("d", latinoGraphLine);
+
+                var graph4 = svg.append("path")
+                    .datum(raceWisedata)
+                    .attr("class", "line")
+                    .attr("stroke", "orange")
+                    .attr("id", "id5")
+                    .attr("d", asianGraphLine);
+
+
+                graphMap["African American"] = graph1;
+                colorMap["African American"] = "lightblue";
+                graphStatusMap["African American"] = 1;
+
+                graphMap["White"] = graph2;
+                graphStatusMap["White"] = 1;
+                colorMap["White"] = "lightgreen";
+
+                graphMap["Latino"] = graph3;
+                graphStatusMap["Latino"] = 1;
+                colorMap["Latino"] = "yellow";
+
+
+                graphMap["Asian"] = graph4;
+                graphStatusMap["Asian"] = 1;
+                colorMap["Asian"] = "orange";
+
+
+
+            }
+
+
+
+
+            svg.selectAll(".dot")
+                .data(stateyear)
+                .enter()
+                .append("circle")
+                .attr("r", 10)
+                .attr("color", "darkgreen")
+                .attr("cx", function (d) { return xaxis(d.Year) })
+                .attr("cy", function (d) { return yaxis(d.UER) })
+                .attr("id", "dotid")
+                .on("mousemove", function (d) {
+
+                    tooltip.style("opacity", 1)
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY) + "px")
+                        .html(d.UER)
+                })
+                .on("mouseout", function () { tooltip.style("opacity", 0) });
+
+
+            const colorScale = d3.scaleOrdinal()
+                .domain(['African American', 'White', 'Latino', 'Asian', "Nation Anual Average"])
+                .range((['lightblue', 'green', 'lightyellow', 'orange', "black"]))
+
+
+            svg.append('g')
+                .attr('transform', `translate(1000,121)`)
+                .call(colorLegend, {
+                    colorScale,
+                    circleRadius: 13,
+                    spacing: 30,
+                    textOffset: 15
+                })
+                .on("click", function (d, i) {
+                    //  alert(event.srcElement.id);
+                    if (graphStatusMap[event.srcElement.id] == 1) {
+                        // hide graph
+                        graphMap[event.srcElement.id].attr("stroke", "white")
+
+                        graphStatusMap[event.srcElement.id] = 0;
+                    }
+                    else {
+                        // show graph
+                        graphMap[event.srcElement.id].attr("stroke", colorMap[event.srcElement.id]);
+                        graphStatusMap[event.srcElement.id] = 1;
+                    }
+
+                });
+
+            const annotations1 = [
+                {
+                    note: { label: "Hi" },
+                    x: 100,
+                    y: 100,
+                    dy: 137,
+                    dx: 162,
+                    subject: { radius: 50, radiusPadding: 10 },
+                },
+            ];
+
+
+
+
+            // Add annotation to the chart
+            //const makeAnnotations = d3.annotation()
+            //.annotations(annotations)
+            //d3.select("#my_report").append("g").call(makeAnnotations)
+
+
+            /*  document.getElementById("White").onclick = function(e) {
+      e = e || event
+var target = e.target || e.srcElement
+// variable target has your clicked element
+      innerId = target.id;
+      //  do your stuff here.
+      alert("Clicked!");
+
+}*/
+
+
+        }
+
+        const colorLegend = (selection, props) => {
+            const {
+                colorScale,
+                circleRadius,
+                spacing,
+                textOffset
+            } = props;
+
+            const groups = selection.selectAll('g')
+                .data(colorScale.domain());
+            const groupsEnter = groups
+                .enter().append('g')
+                .attr('class', 'tick');
+            groupsEnter
+                .merge(groups)
+                .attr('transform', (d, i) =>
+                    `translate(0, ${i * spacing})`
+                );
+            groups.exit().remove();
+
+            groupsEnter.append('circle')
+                .merge(groups.select('circle'))
+                .attr('r', circleRadius)
+                .attr('fill', colorScale);
+
+            groupsEnter.append('text')
+                .merge(groups.select('text'))
+                .text(d => d)
+                .attr('dy', '0.32em')
+                .attr('x', textOffset)
+                .attr("id", function (d) { return d; })
+                .on("click", function (i) { return i; });
+
+
+        }
+
+
 
     </script>
 </body>
