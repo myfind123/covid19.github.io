@@ -10,10 +10,6 @@
 
 <meta charset="utf-8">
 
-<title>Effects of Major EVENTES on Employment</title>
-<p>Effects of Major EVENTES on Employment</p>
-
-
 
 <style>
 
@@ -38,16 +34,29 @@ p {
                 height:280px; 
                         background: white;
         padding: 10px;
+            position: relative;
             }
-    my_report1 {
+
+    .rightbox {
         float: left;
-         background: green;
-         max-width: 2000px;
+        height: 500px;
+        background: white;
+        position: relative;
+        width: 150px;
+        height: 380px;
+        padding-left:100px;
+        padding-top:100px;
+    }
+
+    my_report1 {
+        float: center;
+        background: green;
+        max-width: 2000px;
         height: 2000px;
     }
 
 
-   /* #leftSidePageInfo {
+    /* #leftSidePageInfo {
         background-color: lightblue;
         overflow: auto;
         width: 250px;
@@ -56,17 +65,19 @@ p {
         margin: auto;
         position: relative;
     }
-       */
-    
-    #my_report {
-        max-width: 2000px;
-     //   margin: 0 auto;
-        background: white;
-        padding: 10px;
-        position: relative;
-          float: left;
          max-width: 2000px;
+        margin: 0 auto;
+          max-width: 2000px;
         height: 2000px;
+     
+       */
+
+    #my_report {
+        background: white;
+        padding:10px;
+        padding-left: 100px;
+        position: relative;
+        float: left;
     }
 
     a { /* Navigation button style*/
@@ -76,8 +87,16 @@ p {
     }
 
     .previous {
+        //background-color: #f1f1f1;
+        //color: black;
+   background-color: #4CAF50;
+        color: white;
+    }
+    .page {
         background-color: #f1f1f1;
         color: black;
+        border: 1px solid;
+        text-underline-position: auto;
     }
 
     .next {
@@ -90,9 +109,9 @@ p {
     }
 
     .line {
-  fill: none;
-  stroke-width: 4px;
-  }
+        fill: none;
+        stroke-width: 4px;
+    }
 
   
 
@@ -143,29 +162,45 @@ p {
     .axisRed line {
         stroke: red;
     }
-
-    #tooltip {
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        width: 60px;
+        height: 28px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background: lightsteelblue;
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+    /*
+    .tooltip {
         opacity: 0;
         position: relative;
         text-align: center;
         width: 60px;
         height: 40px;
-        background: lightYellow;
         border: 0px;
+        color : #222;
+       border-width: 1px;
+         border-radius: 10px;
+          padding: 3px;
+     background-color: white;
     }
-
+    */
     #desplegable {
         left: 10px;
         top: 5px;
     }
     .statelist {
-  background-color: green;
-  color: white;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
+        background-color: green;
+        color: white;
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
     .statedropdown-list {
         display: none;
         position: absolute;
@@ -193,11 +228,11 @@ p {
         z-index: 1;
     }
     .axis-label {
-  font-size: 2em;
+  font-size: 1em;
   fill: #8E8883;
 }
     .tick text {
-  font-size: 1.4rem;
+  font-size: 1rem;
   fill: #635F5D;
 }
 
@@ -241,99 +276,262 @@ p {
   margin: 4px 2px;
   cursor: pointer;
 }
+
+.topLegend {
+    border: 1px solid Peru;
+ 
+    min-width: 200px;
+    display: inline-block;
+    background: red;
+}
+.stateSelectButton{
+    visibility:hidden;
+}
 </style>
 
 
 <html>
 <body>
     <div id="tooltip" opacity=0></div>
-    <a href="#" class="previous">&laquo; Previous</a>
-    <a href="#" class="next">Next &raquo;</a>
+
+
+    <div class="dropdown">
+        <a href="#" id="previous" class="previous">&laquo; Previous</a>
+        <a href="#" id="allStatesUER" class="page">1</a>
+        <a href="#" id="dotComCrash" class="page">2</a>
+        <a href="#" id="housingCrash" class="page">3</a>
+        <a href="#" id="pandemicCrash" class="page">4</a>
+        <a href="#" id="crashCompare" class="page">5</a>
+        <a href="#" id="next" class="next">Next &raquo;</a>
+        <!--     <select class="statelist" id="stateSelectButton"><option class="statedropdown-list" display="none" value="State" selected>All States</option></select>
+
+
     <a href="#" class="previous round">&#8249;</a>
     <a href="#" class="next round">&#8250;</a>
-  
-    <div id="leftbox">
-        <div class="dropdown">
-            <select class="statelist" id="stateSelectButton"><option class="statedropdown-list" value="State" selected>All States</option></select>
-            <select class="alltimelist" id="allTimeList"><option class="allTimedropdown-list" value="All time" selected>All time</option></select>
-            <input class="button" type="button" value="dot.Com Crash Effect" id="dotComCrash">
-            <input type="button" class="button" value="Housing Market Effect" id="housingCrash">
-            <input type="button" class="button" value="Covid Pandemic Effect" id="pandemicCrash">
-        </div>
-        <div id="Infobox" align="left">
-            <h3>!DataHeader</h3>
-            <p>
-                !DataContent
-
-            </p>
-
-            <p>
-                </br></br>
-                <i>*!DataFooter</i> <a> !DataReference.</a>
-            </p>
-
-            <p></p>
-        </div>
+               <input type="checkbox" id="idall" value="All" Checked>All<br>
+    <input class="button" type="button" value="dot.Com Crash Effect" id="dotComCrash">
+    <input type="button" class="button" value="Housing Market Effect" id="housingCrash">
+    <input type="button" class="button" value="Covid Pandemic Effect" id="pandemicCrash">-->
     </div>
-    <div id="my_report"  align="center"></div>
-    <div>
-        <svg id="my_dataviz" height=300 width=450></svg>
+
+
+    <div id="my_report" align="left">
+        <h1 id="idheader" align="center">Past two decades (1990-2020) UnEmployment Rate by Race and Ethnicity</h1>
     </div>
+    <div id="colorLegend" class="rightbox">
+        <P>Select Population Group</P>
+        <input type="checkbox" id="idmen" value="Men" > Men(M)<br>
+        <input type="checkbox" id="idwomen" value="Women" >Women(W)<br>
+        <input type="checkbox" id="idboth" value="Combined" checked >Combined(M+W/2)<br>
+        <p></p>
+        <input type="checkbox" id="idblack" value="Black" checked>Black<br>
+        <input type="checkbox" id="idwhite" value="White" checked>White<br>
+        <input type="checkbox" id="idlatino" value="Latino" checked>Hispanic<br>
+        <input type="checkbox" id="idasian" value="Asian" checked>Asian<br>
+        <P>Hide Show Race Group</P>
+    </div>
+ 
 
 
 
     <script>
 
+        var currentPage = 1;
+        var pageMap = new Object();
+        pageMap[1] = "allStatesUER";
+        pageMap[2] = "dotComCrash";
+        pageMap[3] = "housingCrash";
+        pageMap[4] = "pandemicCrash";
+        pageMap[5] = "crashComparision";
+
         // set the dimensions and margins of the graph
         //   var margin = { top: 30, right: 30, bottom: 50, left: 60 },
         var margin = { top: 30, right: 30, bottom: 50, left: 60 },
-            width = 1400 - margin.left - margin.right,
-            height = 800 - margin.top - margin.bottom;
+            width = 1200 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+ 
         var labHeight = 50;
         var labRadius = 10;
         var graphMap = new Object(); // or just {}
         var graphStatusMap = new Object();
         var colorMap = new Object();
+        var showMenGraph = false;
+        var showMenGraph = false;
+        var showBothGraph = true ;
+
+       const dateFormatYear = d3.timeFormat('%Y');
+    
+     //   var parseYear =  d3.timeParse("%Y").parse;
+        var div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+            .style("opacity", 0);
+        document.getElementById("idmen").addEventListener("click", function () {
+            var checkBox = document.getElementById("idmen");
+            if (checkBox.checked == true){
+                      updateGraph("men", true);
+             } else {
+                    updateGraph("men", false);
+
+            }
+         
+
+         }, false);
+        document.getElementById("idwomen").addEventListener("click", function () {
+               var checkBox = document.getElementById("idwomen");
+            if (checkBox.checked == true){
+                      updateGraph("women", true);
+             } else {
+                updateGraph("women", false);
+            }
+        
+        }, false);
+
+        document.getElementById("idboth").addEventListener("click", function () {
+               var checkBox = document.getElementById("idboth");
+            if (checkBox.checked == true){
+                      updateGraph("both", true)
+             } else {
+                updateGraph("both", false);
+            }
+              }, false);
+
+          document.getElementById("idblack").addEventListener("click", function () {
+               var checkBox = document.getElementById("idblack");
+            if (checkBox.checked == true){
+                      updateGraphByRace("id2", true)
+             } else {
+                updateGraphByRace("id2", false);
+            }
+        
+          }, false);
+
+             document.getElementById("idwhite").addEventListener("click", function () {
+               var checkBox = document.getElementById("idwhite");
+            if (checkBox.checked == true){
+                      updateGraphByRace("id3", true)
+             } else {
+                updateGraphByRace("id3", false);
+            }
+        
+             }, false);
+       
+             document.getElementById("idlatino").addEventListener("click", function () {
+               var checkBox = document.getElementById("idlatino");
+            if (checkBox.checked == true){
+                      updateGraphByRace("id4", true)
+             } else {
+                updateGraphByRace("id4", false);
+            }
+        
+             }, false);
+
+            document.getElementById("idasian").addEventListener("click", function () {
+               var checkBox = document.getElementById("idasian");
+            if (checkBox.checked == true){
+                      updateGraphByRace("id5", true)
+             } else {
+                updateGraphByRace("id5", false);
+            }
+            }, false);
+
+         document.getElementById("next").addEventListener("click", function () {
+
+             if (currentPage < 5) {
+                 currentPage = currentPage + 1;
+                 pageTraversal(currentPage);
+             }
+
+         }, false);
+           document.getElementById("previous").addEventListener("click", function () {
+               if (currentPage > 1) {
+                   currentPage = currentPage - 1;
+                       pageTraversal(currentPage);
+               }
+
+        }, false);
 
 
         document.getElementById("dotComCrash").addEventListener("click", function () {
-               updateLeftSideInfoBar("dotComCrash");
+                 clearExistingGraph();
+            updateLeftSideInfoBar("dotComCrash");
             showCrashGraph("dotComCrash");
-         
+            currentPage = 2;
+
         }, false);
         document.getElementById("housingCrash").addEventListener("click", function () {
-               updateLeftSideInfoBar("dotComCrash");
+                 clearExistingGraph();
+            updateLeftSideInfoBar("housingCrash");
             showCrashGraph("housingCrash");
+            currentPage = 3;
         }, false);
 
         document.getElementById("pandemicCrash").addEventListener("click", function () {
-               updateLeftSideInfoBar("dotComCrash");
+                 clearExistingGraph();
+            updateLeftSideInfoBar("pandemicCrash");
             showCrashGraph("pandemicCrash");
+            currentPage = 4;
         }, false);
 
-        // append the svg object to the body of the page
-        // color
-        c = d3.scaleOrdinal()
-            .domain(["male", "female"])
-            .range(["#a6cee3", "#fb9a99"]);
+        document.getElementById("crashCompare").addEventListener("click", function () {
+                   clearExistingGraph();
+            updateLeftSideInfoBar("crashCompare");
+            showCrashGraph("crashCompare");
+            currentPage = 5;
+        }, false);
+        document.getElementById("allStatesUER").addEventListener("click", function () {
+            clearExistingGraph();
+              updateLeftSideInfoBar("All States");
+                   d3.csv("UERStatewiseData.csv", function (data) {
+                       showGraphState("All States", data);
+                        currentPage = 1;
+                    })
+          }, false);
 
-        const annotations = [
-            {
-                note: {
-                    label: "Here is the annotation label",
-                    title: "Annotation title"
-                },
-                x: margin.left,
-                y: margin.top,
-                dy: margin.left + 10,
-                dx: margin.top + 10
+        function pageTraversal(pos) {
+
+            if (pos == 1) {
+                updateLeftSideInfoBar("All States Overview");
+                       clearExistingGraph();
+                   d3.csv("UERStatewiseData.csv", function (data) {
+                       showGraphState("All States", data);
+                        currentPage = 1;
+                    })
             }
-        ]
+            else if (pos == 2) {
+                    updateLeftSideInfoBar("dotComCrash");
+            showCrashGraph("dotComCrash");
+            }
+            else if (pos == 3) {
+                  updateLeftSideInfoBar("housingCrash");
+            showCrashGraph("housingCrash");
+            currentPage = 3;
+            }
+            else if (pos == 4) {
+                    updateLeftSideInfoBar("pandemicCrash");
+            showCrashGraph("pandemicCrash");
+            currentPage = 4;
 
+            }
+        }
 
+        var selectedState = "All States";
+
+          clearExistingGraph();
+              updateLeftSideInfoBar("All States");
+                   d3.csv("UERStatewiseData.csv", function (data) {
+                       showGraphState("All States", data);
+                        currentPage = 1;
+                    })
+          
+          /*clearExistingGraph();
+                    d3.csv("UERStatewiseData.csv", function (data) {
+                        showGraphState(selectedState, data);
+                    })
+                    */
+        /*
         d3.csv("IndexValue.csv", function (error, data) {
 
-            var selectedState = "";
+           var selectedState = "";
             d3.select("#stateSelectButton").selectAll("myOptions")
                 .data(data)
                 .enter()
@@ -344,19 +542,14 @@ p {
             d3.select("#stateSelectButton")
                 .on("change", function (d) {
                     selectedState = d3.select(this).property("value");
-                    d3.select("#id1").remove();
-                    d3.select("#xaxis").selectAll('.tick').remove();
-                    d3.select("#yaxis").selectAll('.tick').remove();
-                    d3.select("#yaxis").remove();
-                    d3.selectAll("#dotid").remove();
-
+                    clearExistingGraph();
                     d3.csv("UERStatewiseData.csv", function (data) {
                         showGraphState(selectedState, data);
                     })
 
                 });
 
-        });
+        });*/
 
         var svg = d3.select("#my_report")
             .append("svg")
@@ -372,145 +565,507 @@ p {
                 .style("opacity", 0);
             return tooltipDiv;
         };
-     //     d3.csv("UERStatewise-4.csv", function (data) {
+        //     d3.csv("UERStatewise-4.csv", function (data) {
         d3.csv("UERStatewiseData.csv", function (data) {
             showGraphState("All States", data);
         })
 
+        function updateGraphByRace(raceid, status) {
+    
+
+            if (status == false) {
+                if (document.getElementById("idmen").checked == true)
+                    clearGroupGraph(raceid + "men");
+                if (document.getElementById("idwomen").checked == true)
+                    clearGroupGraph(raceid + "women");
+               if (document.getElementById("idboth").checked == true)
+                    clearGroupGraph(raceid + "both");
+
+            }
+            else {
+                    if (document.getElementById("idmen").checked == true)
+                    updateGraph( "men",true);
+                if (document.getElementById("idwomen").checked == true)
+                    updateGraph("women", true);
+                if (document.getElementById("idboth").checked == true)
+                    updateGraph("both", true);
+            }
+
+            
+        }
+        function updateGraph(gender, status) {
+
+            if (status == false) {
+                if (document.getElementById("idblack").checked == true)
+                    clearGroupGraph("id2" + gender);
+                if (document.getElementById("idwhite").checked == true)
+                    clearGroupGraph("id3" + gender);
+                if (document.getElementById("idlatino").checked == true)
+                    clearGroupGraph("id4" + gender);
+                if (document.getElementById("idasian").checked == true)
+                    clearGroupGraph("id5" + gender);
+            }
+            else {
+                d3.csv("UERStatewiseData.csv", function (data1) {
+
+                    if (document.getElementById("idblack").checked == true)
+                        showGraphByRaceGroup(data1, gender, "Black", "id2" + gender, "lightblue", "line", "African American" + gender);
+                    else
+                        clearGroupGraph("id2" + gender);
+
+                    if (document.getElementById("idwhite").checked == true)
+                        showGraphByRaceGroup(data1, gender, "White", "id3" + gender, "lightgreen", "line", "White" + gender);
+                    else
+                        clearGroupGraph("id3" + gender);
+
+
+                    if (document.getElementById("idlatino").checked == true)
+                        showGraphByRaceGroup(data1, gender, "Latino", "id4" + gender, "red", "line", "Latino" + gender);
+                    else
+                        clearGroupGraph("id4" + gender);
+
+                    if (document.getElementById("idasian").checked == true)
+                        showGraphByRaceGroup(data1, gender, "Asian", "id5" + gender, "orange", "line", "Asian" + gender);
+                    else
+                        clearGroupGraph("id5" + gender);
+
+
+                })
+            }
+          //  alert(gender);
+        }
         function clearExistingGraph() {
-            d3.select("#id1").remove();
+         //   d3.select("#colorLegend").selectAll().remove();
+            d3.select("#colorLegend").selectAll("svg").remove();
+             d3.select("#id1").remove();
             d3.select("#id2").remove();
+        
             d3.select("#id3").remove();
             d3.select("#id4").remove();
             d3.select("#id5").remove();
-
+            d3.select("idlegend").remove();
             d3.select("#xaxis").selectAll('.tick').remove();
             d3.select("#yaxis").selectAll('.tick').remove();
             d3.select("#yaxis").remove();
             d3.select("#xaxis").remove();
             d3.selectAll("#dotid").remove();
+            d3.selectAll("#aid").remove();
+            d3.selectAll("#aidtxt").remove();
+            updateGraph( "men",  false);
+            updateGraph("women", false);
+            updateGraph("both", false);
+            document.getElementById("idwomen").checked = false;
+            document.getElementById("idmen").checked = false;
+            document.getElementById("idboth").checked = true;
+           //       d3.select("#xaxis").selectAll('.tick').remove();
+          //  d3.select("#idbaryaxis").selectAll('.tick').remove();
+            d3.select("#idbarxaxis").remove();
+            d3.select("#idbaryaxis").remove();
+            d3.selectAll("#barid").remove();
+            d3.selectAll("#idbarlegend").remove();
+            d3.select("#idaline1").remove();
+            d3.select("#idatext1").remove();
+            d3.select("#idaline2").remove();
+            d3.select("#idatext2").remove();
+            d3.select("#idaline3").remove();
+            d3.select("#idatext3").remove();
+
+            document.getElementById("colorLegend").style.visibility = "hidden";
+            
+        
+
+
+        }
+
+        function clearGroupGraph( graphid) {
+
+                d3.select("#"+graphid).remove();
         }
 
         function updateLeftSideInfoBar(inputvalue) {
 
-            var infoText =  "Paragraph changed!";
+            var infoText = "Paragraph changed!";
             if (inputvalue == "dotComCrash") {
-                
+
+                infoText = " Unemployment Rate during dotcom crash Year 1999-2001";
             }
             else if (inputvalue == "housingCrash") {
-
+                infoText = " Unemployment Rate during Housing  crash Year 2006-2009";
             }
 
             else if (inputvalue == "pandemicCrash") {
-
+                infoText = " Unemployment Rate during Covid Pandemic 2019-2020";
             }
-            document.getElementById("Infobox").innerHTML =infoText
-            
-         
+            else if (inputvalue == "crashCompare") {
+                 infoText = " Unemployment Rate  comparision in Last 3 major economy down time";
+            }
+            else
+                infoText = "Past two decades UnEmployment Rate by Race and Ethnicity";
+
+            document.getElementById("idheader").innerHTML = infoText
+
+
 
         }
         function showCrashGraph(inputvalue) {
 
             var filename = "";
-
+            clearExistingGraph();
             if (inputvalue == "dotComCrash")
                 filename = "DotComCrashUER.csv";
             else if (inputvalue == "housingCrash")
                 filename = "housingCrashUER.csv";
             else if (inputvalue == "pandemicCrash")
                 filename = "pandemicUER.csv";
+            else if (inputvalue == "crashCompare")
+                filename = "UERRacewiseCompare.csv";
 
-            clearExistingGraph();
-            //  var uerData = new Object();
-            d3.csv(filename, function (data) {
+            console.log(filename);
+            if (inputvalue != "crashCompare") {
+                d3.csv(filename, function (data) {
+                    showGraphState("All States", data);
+                })
 
-                var statename = "All States";
-                var uerData = data.map(function (d) {
+            }
+            else {
+
+                d3.csv(filename, function (data1) {
+
+                    var data = data1.map(function (d) {
+                        return {
+                            Year: d.Year, Black: d.Black, White: d.White, Latino: d.Latino, Asian: d.Asian
+                        }
+                    });
+                    var subgroups = d3.keys(data[0]).filter(function (d) { if (d != "Year") return d; });
+                    console.log(subgroups);
+
+                    console.log(data);
+
+                    var groups = d3.map(data, function (d) { ; return d.Year; }).keys();
+                    console.log(groups);
+
+                    // Add X axis
+                    xaxis = d3.scaleBand()
+                        .domain(groups)
+                        .range([0, width])
+                        .padding([0.2])
+
+                    svg.append("g")
+                        .attr("id", "idbarxaxis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(xaxis).tickSize(0));
+
+                    // Add Y axis
+                    yaxis = d3.scaleLinear()
+                        .domain([0, 14])
+                        .range([height, 0]);
+                    svg.append("g")
+                        .attr("id", "idbaryaxis")
+                        .call(d3.axisLeft(yaxis));
+
+
+                    var xSubgroup = d3.scaleBand()
+                        .domain(subgroups)
+                        .range([0, xaxis.bandwidth()])
+                        .padding([0.05])
+
+                    var color = d3.scaleOrdinal()
+                        .domain(subgroups)
+                        .range(['lightblue', 'green', 'red', 'orange', "purple"])
+
+                    // Show the bars
+                    svg.append("g")
+                        .selectAll("g")
+                        // Enter in data = loop group per group
+                        .data(data)
+                        .enter()
+                        .append("g")
+                        .attr("id", "barid")
+                        .attr("transform", function (d) { return "translate(" + xaxis(d.Year) + ",0)"; })
+                        .selectAll("rect")
+                        .data(function (d) { return subgroups.map(function (key) { return { key: key, value: d[key] }; }); })
+                        .enter().append("rect")
+                        .attr("x", function (d) { return xSubgroup(d.key); })
+                        .attr("y", function (d) { return yaxis(d.value); })
+                        .on("mouseover", function (d) {
+                            div.transition()
+                                .duration(200)
+                                .style("opacity", .9);
+                            div.html(d.key + "<br>" + d.value)
+                                .style("left", (d3.event.pageX) + "px")
+                                .style("top", (d3.event.pageY - 28) + "px");
+                        })
+                        .on("mouseout", function (d) {
+                            div.transition()
+                                .duration(500)
+                                .style("opacity", 0)
+                        })
+                        .attr("width", xSubgroup.bandwidth())
+                        .attr("height", function (d) { return height - yaxis(d.value); })
+                        .attr("fill", function (d) { return color(d.key); })
+
+
+                    var legend = svg.selectAll(".legend")
+                        .data(d3.keys(data[0]).filter(function (d) { if (d != "Year") return d; }))
+                        .enter().append("g")
+                        .attr("class", "legend")
+                        .attr("id", "idbarlegend")
+                        .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+                    legend.append("rect")
+                        .attr("x", width - 18)
+                        .attr("width", 18)
+                        .attr("height", 18)
+                        .style("fill", color);
+                    legend.append("text")
+                        .attr("x", width - 24)
+                        .attr("y", 9)
+                        .attr("dy", ".35em")
+                        .style("text-anchor", "end")
+                        .text(function (d) { if (d == "Black") return "African American"; return d; });
+
+
+                  //  svg.append("text").attr("class", "annotation2")
+               //         .attr("x", 80).attr("y",40).attr("dy", "-5em").text("Overall White Americans are managing the recession compare to others.")
+                   //     .style("font-size", "14px").style("font-weight", "bold");
+
+             /*       svg.append("g")
+                        .append('line').attr("class", "annotation1").style("stroke", "black")
+                        .attr("id","idaline1")
+                        .attr("x1", 600).attr("y1", 80).attr("x2", 770).attr("y2", 200);
+
+                    svg.append("text").attr("class", "annotation2")
+                        .attr("id","idatext1")
+                        .attr("x", 450).attr("y", 150).attr("dy", "-5em").text("Aferican american is highest impacted race in any recession")
+                        .style("font-size", "14px").style("font-weight", "bold");*/
+
+                        showAnnotation(600, 80, 770, 200, 450, 150, "1", "Aferican american is highest impacted race in any recession");
+                        showAnnotation(850, 40, 900, 100, 500, 100, "2", "Hisponic-2nd highest vulnerable community in any recession");
+                        showAnnotation(250, 40, 180, 320, 100, 100, "3", "Whites-Managing recession better than others");
+              //   svg.append("g").append('line')
+               //     .attr("id","idaline2")
+                //        .attr("class", "annotation1").style("stroke", "black")
+                //      .attr("x1", 500).attr("y1", 100).attr("x2", 800).attr("y2", 150);
+
+//                    svg.append("text").attr("class", "annotation2")
+  //                         .add("id","idatext3")
+    //                    .attr("x", 650).attr("y", 100).attr("dy", "-5em").text("Hisponic-2nd highest vulnerable community in any recession")
+      //                 .style("font-size", "14px").style("font-weight", "bold");
+
+              
+
+              //      svg.append("g")
+                //        .append('line').attr("class", "annotation1").style("stroke", "black")
+                  //      .attr("x1", 200).attr("y1", 30).attr("x2", 80).attr("y2", 200);
+
+              //      svg.append("text").attr("class", "annotation2")
+                //        .attr("x", 100).attr("y", 100).attr("dy", "-5em").text("Aferican american is highest impacted race in any recession")
+                  //      .style("font-size", "14px").style("font-weight", "bold");
+                }
+                )
+
+            }
+        }
+
+        function showAnnotation(x1, y1, x2, y2, x, y, id, displaytext) {
+               svg.append("g")
+                        .append('line').attr("class", "annotation1").style("stroke", "black")
+                        .attr("id","idaline"+id)
+                        .attr("x1", x1).attr("y1", y1).attr("x2", x2).attr("y2", y2);
+
+                    svg.append("text").attr("class", "annotation2")
+                        .attr("id","idatext"+id)
+                        .attr("x", x).attr("y", y).attr("dy", "-5em").text(displaytext)
+                        .style("font-size", "14px").style("font-weight", "bold");
+        }
+                /*
+                d3.csv(filename, function (data) {
+    
+                    var statename = "All States";
+                    var uerData = data.map(function (d) {
+                        return {
+                            Year: d3.timeParse("%Y")(d.Year), UER: d[statename]
+                        }
+                    });
+    
+                    xaxis = d3.scaleTime()
+                        .domain(d3.extent(uerData, function (d) { return d.Year; }))
+                        .range([0, width]);
+    
+                    svg.append("g")
+                        .attr("transform", "translate(0," + height + ")")
+                        .attr("id", "xaxis")
+                        .style("font", "20px times")
+                        .call(d3.axisBottom(xaxis));
+    
+                    // Add Y axis
+                    yaxis = d3.scaleLinear()
+                        .domain([0, d3.max(uerData, function (d) { return d.UER; })])
+                      //  .domain([0, 18])
+                        .range([height, 0])
+    
+                    svg.append("g")
+                        .attr("id", "yaxis")
+                        .style("font", "20px times")
+                        .call(d3.axisLeft(yaxis));
+    
+                    // text label for the x axis
+                    svg.append("text")
+                        .attr('class', 'axis-label')
+                        .attr("transform",
+                            "translate(" + (width / 2) + " ," +
+                            (height + margin.top + 20) + ")")
+                        .style("text-anchor", "middle")
+                        .text("Year");
+    
+                    // text label for the y axis
+                    svg.append("text")
+                        .attr("transform", "rotate(-90)")
+                        .attr('class', 'axis-label')
+                        .attr("y", 0 - margin.left)
+                        .attr("x", 0 - (height / 2))
+                        .attr("dy", "1em")
+                        .style("text-anchor", "middle")
+                        .text("UnEmployment Rate %");
+    
+                    var valueline3 = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.UER); });
+    
+    
+    
+                    svg.append("path")
+                        .datum(uerData)
+                        .transition()
+                        .duration(1000)
+                        .attr("class", "line")
+                        .attr("stroke", "purple")
+                        .attr("id", "id1")
+                        .attr("d", valueline3);
+    
+                //    Console.log(uerData);
+    
+    
+                    // Add the scatterplot
+                    svg.selectAll(".dot")
+                        .data(data)
+                        .enter().append("circle")
+                        .attr("r", 5)
+                        .attr("cx", function (d) { return xaxis(d.Year); })
+                        .attr("cy", function (d) { return yaxis(d.UER); })
+                        .on("mouseover", function (d) {
+                            div.transition()
+                                .duration(200)
+                                .style("opacity", .9);
+                            div.html(dateFormatYear(d.Year) + "<br/>" + d.UER)
+                                .style("left", (d3.event.pageX) + "px")
+                                .style("top", (d3.event.pageY - 28) + "px");
+                        })
+                        .on("mouseout", function (d) {
+                            div.transition()
+                                .duration(500)
+                                .style("opacity", 0);
+                        });
+    
+                  //    svg.selectAll(".dot")
+                  //        .data(uerData)
+                  //        .enter()
+                  //        .append("circle")
+                  //        .attr("r", 6)
+                  //        .attr("color", "blue")
+                  //        .attr("cx", function (d) { return xaxis(d.Year) })
+                  //        .attr("cy", function (d) { return yaxis(d.UER) })
+                  //        .attr("id", "dotid")
+                  //        .on("mousemove", function (d) {
+                  //            tooltip.style("opacity", 1)
+                  //                .style("left", (d3.event.pageX) +"px")
+                  //                .style("top", (d3.event.pageY) +"px")
+                  //                .html(d.UER)
+                  //        })
+                  //        .on("mouseout", function () { tooltip.style("opacity", 0) });
+                  //})
+    
+    
+                })
+                */
+            
+        
+
+        function showGraphByRaceGroup(data1,grouptype, racetype, graphid, graphColor, graphType, mapIndexType){
+
+           
+            var raceWiseCustomData = data1.map(function (d) {
+                if (grouptype == "men") {
                     return {
-                        Year: d3.timeParse("%Y")(d.Year), UER: d[statename]
+                        Year: d3.timeParse("%Y")(d.Year), Black: d.MBlack, White: d.MWhite, Latino: d.MLatino, Asian: d.MAsian
                     }
+                }
+                if (grouptype == "women") {
+                    return {
+                        Year: d3.timeParse("%Y")(d.Year), Black: d.WBlack, White: d.WWhite, Latino: d.WLatino, Asian: d.WAsian
+                    }
+                }
+                else {
+                     return {
+                        Year: d3.timeParse("%Y")(d.Year), Black: d.Black, White: d.White, Latino: d.Latino, Asian: d.Asian
+                    }
+                }
+
                 });
+            var graphLine = null;
+            if( racetype == "Black")
+                 graphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Black); });
+            else if (racetype =="White")
+                 graphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.White); });
+            else if (racetype =="Latino")
+                 graphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Latino); });
+            else if (racetype =="Asian")
+                 graphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Asian); });
 
-                xaxis = d3.scaleTime()
-                    .domain(d3.extent(uerData, function (d) { return d.Year; }))
-                    .range([0, width]);
-
-                svg.append("g")
-                    .attr("transform", "translate(0," + height + ")")
-                    .attr("id", "xaxis")
-                    .style("font", "20px times")
-                    .call(d3.axisBottom(xaxis));
-
-                // Add Y axis
-                yaxis = d3.scaleLinear()
-                    //  .domain([0, d3.max(stateyear, function (d) { return +d.UER; })])
-                    .domain([-1, 18])
-                    .range([height, 0])
+        //    var localsvg = d3.select("#my_report").select("svg");
+         //   .append("svg")
+        //    console.log(yaxis);
+          ///  console.log(xaxis);
 
 
+         //   console.log(raceWiseCustomData);
 
-                svg.append("g")
-                    .attr("id", "yaxis")
-                    .style("font", "20px times")
-                    .call(d3.axisLeft(yaxis));
+            if (grouptype == "men") {
 
-                // text label for the x axis
-                svg.append("text")
-                    .attr('class', 'axis-label')
-                    .attr("transform",
-                        "translate(" + (width / 2) + " ," +
-                        (height + margin.top + 20) + ")")
-                    .style("text-anchor", "middle")
-                    .text("Date");
-
-                console.log(uerData);
-                // text label for the y axis
-                svg.append("text")
-                    .attr("transform", "rotate(-90)")
-                    .attr('class', 'axis-label')
-                    .attr("y", 0 - margin.left)
-                    .attr("x", 0 - (height / 2))
-                    .attr("dy", "1em")
-                    .style("text-anchor", "middle")
-                    .text("UnEmployment Rate %");
-
-                var valueline3 = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.UER); });
-
-
-
-                svg.append("path")
-                    .datum(uerData)
-                    .attr("class", "line")
-                    .attr("stroke", "black")
-                    .attr("id", "id1")
-                    .attr("d", valueline3);
-
-
-
-                svg.selectAll(".dot")
-                    .data(uerData)
-                    .enter()
-                    .append("circle")
-                    .attr("r", 10)
-                    .attr("color", "darkgreen")
-                    .attr("cx", function (d) { return xaxis(d.Year) })
-                    .attr("cy", function (d) { return yaxis(d.UER) })
-                    .attr("id", "dotid")
-                    .on("mousemove", function (d) {
-
-                        tooltip.style("opacity", 1)
-                            .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY) + "px")
-                            .html(d.UER)
-                    })
-                    .on("mouseout", function () { tooltip.style("opacity", 0) });
+                var graph1 = svg.append("path")
+                    .datum(raceWiseCustomData)
+                    .attr("class", graphType)
+                   .style("stroke-dasharray", ("3, 3")) 
+                    .attr("stroke", graphColor)
+                    .attr("id", graphid)
+                    .attr("d", graphLine);
+            }
+            else if (grouptype == "women") {
+                   var graph1 = svg .append("path")
+                    .datum(raceWiseCustomData)
+                       .attr("class", graphType)
+                         .attr("stroke", graphColor)
+                    .style("stroke-dasharray", ("7, 7")) 
+                  
+                    .attr("id", graphid)
+                    .attr("d", graphLine);
+            }
+            else {
+  
+                      var graph1 = svg .append("path")
+                    .datum(raceWiseCustomData)
+                    .attr("class", graphType)
+                    .attr("stroke", graphColor)
+                    .attr("id", graphid)
+                    .attr("d", graphLine);
             }
 
-            )
+                graphMap[mapIndexType] = graph1;
+                colorMap[mapIndexType] = graphColor;
+                graphStatusMap[mapIndexType] = 1;
         }
+          
         function showGraphState(statename, data1) {
 
-            var tooltip = d3.select("#tooltip");
+            
+            document.getElementById("colorLegend").style.visibility = "visible";
             var stateyear = data1.map(function (d) {
                 return {
                     Year: d3.timeParse("%Y")(d.Year), UER: d[statename]
@@ -529,7 +1084,7 @@ p {
             // Add Y axis
             yaxis = d3.scaleLinear()
                 //  .domain([0, d3.max(stateyear, function (d) { return +d.UER; })])
-                .domain([-1, 18])
+                .domain([0, 18])
                 .range([height, 0])
 
             svg.append("g")
@@ -544,7 +1099,7 @@ p {
                     "translate(" + (width / 2) + " ," +
                     (height + margin.top + 20) + ")")
                 .style("text-anchor", "middle")
-                .text("Date");
+                .text("Year");
 
             // text label for the y axis
             svg.append("text")
@@ -562,7 +1117,8 @@ p {
                 .transition()
                 .duration(1000)
                 .attr("class", "line")
-                .attr("stroke", "black")
+                .attr("stroke", "purple")
+                .attr("stroke-dasharray", "5,5")
                 .attr("id", "id1")
                 .attr("d", valueline3);
 
@@ -574,20 +1130,27 @@ p {
                         Year: d3.timeParse("%Y")(d.Year), Black: d.Black, White: d.White, Latino: d.Latino, Asian: d.Asian
                     }
                 });
+                let gender = "both";
+                showGraphByRaceGroup(data1, "Both", "Black", "id2" + gender, "lightblue", "line", "African American" + gender);
+                showGraphByRaceGroup(data1, "Both", "White", "id3" + gender, "lightgreen", "line", "White" + gender);
+                showGraphByRaceGroup(data1, "Both", "Latino", "id4" + gender, "red", "line", "Latino" + gender);
+                showGraphByRaceGroup(data1, "Both", "Asian", "id5" + gender, "orange", "line", "Asian" + gender);
+             //   showGraphByRaceGroup(data1, "Both", "Black", "id3", "lightgreen", "line", "White");
 
-                var blackGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Black); });
-                var whiteGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.White); });
-                var latinoGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Latino); });
-                var asianGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Asian); });
+              //  var blackGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Black); });
+            //    var whiteGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.White); });
+            //    var latinoGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Latino); });
+             //   var asianGraphLine = d3.line().x(function (d) { return xaxis(d.Year); }).y(function (d) { return yaxis(d.Asian); });
 
+                /*
                 var graph1 = svg.append("path")
                     .datum(raceWisedata)
                     .attr("class", "line")
                     .attr("stroke", "lightblue")
                     .attr("id", "id2")
                     .attr("d", blackGraphLine);
-
-
+                */
+/*
                 var graph2 = svg.append("path")
                     .datum(raceWisedata)
                     .attr("class", "line")
@@ -608,63 +1171,65 @@ p {
                     .attr("stroke", "orange")
                     .attr("id", "id5")
                     .attr("d", asianGraphLine);
+                    */
 
+              //  graphMap["African American"] = graph1;
+           //     colorMap["African American"] = "lightblue";
+            //    graphStatusMap["African American"] = 1;
 
-                graphMap["African American"] = graph1;
-                colorMap["African American"] = "lightblue";
-                graphStatusMap["African American"] = 1;
-
-                graphMap["White"] = graph2;
+             /*   graphMap["White"] = graph2;
                 graphStatusMap["White"] = 1;
                 colorMap["White"] = "lightgreen";
 
                 graphMap["Latino"] = graph3;
                 graphStatusMap["Latino"] = 1;
-                colorMap["Latino"] = "yellow";
+                colorMap["Latino"] = "red";
 
 
                 graphMap["Asian"] = graph4;
                 graphStatusMap["Asian"] = 1;
-                colorMap["Asian"] = "orange";
+                colorMap["Asian"] = "orange";*/
 
 
 
             }
 
-
-
-
-            svg.selectAll(".dot")
-                .data(stateyear)
-                .enter()
-                .append("circle")
-                .attr("r", 10)
-                .attr("color", "darkgreen")
-                .attr("cx", function (d) { return xaxis(d.Year) })
-                .attr("cy", function (d) { return yaxis(d.UER) })
-                .attr("id", "dotid")
-                .on("mousemove", function (d) {
-
-                    tooltip.style("opacity", 1)
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY) + "px")
-                        .html(d.UER)
-                })
-                .on("mouseout", function () { tooltip.style("opacity", 0) });
-
+              // Add the scatterplot
+                svg.selectAll(".dot")
+                    .data(stateyear)
+                    .enter().append("circle")
+                    .attr("r", 5)
+                    .attr("cx", function (d) { return xaxis(d.Year); })
+                    .attr("cy", function (d) { return yaxis(d.UER); })
+                      .attr("id", "dotid")
+                    .on("mouseover", function (d) {
+                        div.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                        div.html( dateFormatYear(d.Year) + "<br/>" + d.UER)
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function (d) {
+                        div.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+                    });
 
             const colorScale = d3.scaleOrdinal()
-                .domain(['African American', 'White', 'Latino', 'Asian', "Nation Anual Average"])
-                .range((['lightblue', 'green', 'lightyellow', 'orange', "black"]))
+                .domain(['African American', 'White', 'Latino', 'Asian', "Annual Average","Men", "Women"])
+                .range((['lightblue', 'green', 'red', 'orange', "purple","red","red"]))
 
-
-            svg.append('g')
-                .attr('transform', `translate(1000,121)`)
-                .call(colorLegend, {
+            var linestyle=["line","line","line","line","line","dash","dot"]
+            d3.select("#colorLegend").append("svg").append("g")
+                .attr('transform', `translate(10,20)`)
+                .attr("id","idlegend")
+                .call(mapLegend, {
                     colorScale,
-                    circleRadius: 13,
-                    spacing: 30,
-                    textOffset: 15
+                    circleRadius: 10,
+                    spacing: 20,
+                    textOffset: 15,
+                    linestyle
                 })
                 .on("click", function (d, i) {
                     //  alert(event.srcElement.id);
@@ -686,20 +1251,24 @@ p {
                 {
                     note: { label: "Hi" },
                     x: 100,
-                    y: 100,
+                    y: 700,
                     dy: 137,
                     dx: 162,
                     subject: { radius: 50, radiusPadding: 10 },
                 },
             ];
 
+            showAnnotation(380, 80, 380, 420, 300, 140, "1", "2000 DotCom Crash");
+            showAnnotation(600, 80, 600, 420, 600, 140, "2", "2008 Housing Market Crash");
+            showAnnotation(1100, 80, 1100, 420, 1000, 100, "3", "2020 Covid Pademic");
 
 
-
+      //    showAnnotation("#my_report", stateyear, '2000', 'StockMarket Crash', 20, xaxis, yaxis);
+        //    showAnnotation("#my_report", stateyear, '2008', 'Housing Market crash', 20, xaxis, yaxis);
+         //   showAnnotation("#my_report", stateyear, '2020', 'Covid Pandemic', 25, xaxis, yaxis);
             // Add annotation to the chart
-            //const makeAnnotations = d3.annotation()
-            //.annotations(annotations)
-            //d3.select("#my_report").append("g").call(makeAnnotations)
+            //   const makeAnnotations = d3.annotation().annotations(annotations)
+            //       d3.select("#my_report").append("g").call(makeAnnotations)
 
 
             /*  document.getElementById("White").onclick = function(e) {
@@ -715,41 +1284,81 @@ var target = e.target || e.srcElement
 
         }
 
-        const colorLegend = (selection, props) => {
-            const {
-                colorScale,
-                circleRadius,
-                spacing,
-                textOffset
-            } = props;
+      const mapLegend = (selection, props) => {
+    const {
+        colorScale,
+        circleRadius,
+        spacing,
+        textOffset,
+        linestyle
+    } = props;
 
-            const groups = selection.selectAll('g')
-                .data(colorScale.domain());
-            const groupsEnter = groups
-                .enter().append('g')
-                .attr('class', 'tick');
-            groupsEnter
-                .merge(groups)
-                .attr('transform', (d, i) =>
-                    `translate(0, ${i * spacing})`
-                );
-            groups.exit().remove();
+    const groups = selection.selectAll('g')
+        .data(colorScale.domain());
+    const groupsEnter = groups
+        .enter().append('g')
+        .attr('class', 'tick');
+    groupsEnter
+        .merge(groups)
+        .attr('transform', (d, i) =>
+            `translate(0, ${i * spacing})`
+        );
+    groups.exit().remove();
 
-            groupsEnter.append('circle')
-                .merge(groups.select('circle'))
-                .attr('r', circleRadius)
-                .attr('fill', colorScale);
+          /*   groupsEnter.append('circle')
+        .merge(groups.select('circle'))
+        .attr('r', circleRadius)
+        .attr('fill', colorScale);
+           * 
+           * legend.append("line")
+      .attr("x1", width - 28)
+      .attr("x2", width)
+      .attr("y1", 10)
+      .attr("y2", 10)
+      .style("stroke-dasharray","5,5")
+      .style("stroke", color);
+
+  legend.append("text")
+      .attr("x", width - 44)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+  groupsEnter.append("line")//making a line for legend
+      .attr("x1", circleRadius-5)
+      .attr("x2", circleRadius-5)
+      .attr("y1", circleRadius-10)
+      .attr("y2", circleRadius-10)
+         .merge(groups.select('line'))
+   //   .style("stroke-dasharray","5,5")//dashed array for line
+      .style("stroke", colorScale);*/
+ //  groupsEnter.append('circle')
+   //     .merge(groups.select('circle'))
+    //    .attr('r', circleRadius)
+      //  .attr('fill', colorScale);
+          groupsEnter.append("line")//making a line for legend
+               .merge(groups.select('line'))
+
+              .attr("stroke-width", 3)
+              .attr("stroke", function (d, i) { return d[i]; })
+                    .attr("x1", textOffset-15)
+      .attr("x2", textOffset+50)
+      .attr("y1", textOffset-15)
+              .attr("y2", textOffset - 15)
+               .style("stroke-dasharray", function (d, i) { if (linestyle[i] == "dash") return "7,7"; else if (linestyle[i] == "dot") return "3,3"; return "none";})//dashed array for line
 
             groupsEnter.append('text')
                 .merge(groups.select('text'))
                 .text(d => d)
                 .attr('dy', '0.32em')
-                .attr('x', textOffset)
-                .attr("id", function (d) { return d; })
+                .attr('x', textOffset+55)
+                .attr("id", function (d) {  return d; })
                 .on("click", function (i) { return i; });
 
 
         }
+
+      
 
 
 
