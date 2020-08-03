@@ -269,7 +269,7 @@ p {
         <input type="checkbox" id="idwhite" value="White" checked>White<br>
         <input type="checkbox" id="idlatino" value="Latino" checked>Hispanic<br>
         <input type="checkbox" id="idasian" value="Asian" checked>Asian<br>
-        <P> <b></b>Hide Show Race Group </b></P>
+        <P> <b>Hide Show Race Group </b></P>
     </div>
  
 
@@ -378,14 +378,11 @@ p {
          document.getElementById("next").addEventListener("click", function () {
 
              if (currentPage < 5) {
-              //   btn.style.backgroundColor =  #f1f1f1; // deselected
-           //      document.getElementById(pageMap[currentPage]).style.backgroundColor = "#4CAF50";
                   changeButtonColor(pageMap[currentPage],  "black");
                  currentPage = currentPage + 1;
                 changeButtonColor(pageMap[currentPage], "Red");
                  pageTraversal(currentPage);
-                //   document.getElementById(pageMap[currentPage]).style.backgroundColor = "Blue";
-                   
+                    
              }
 
          }, false);
@@ -406,39 +403,47 @@ p {
         }
 
         document.getElementById("dotComCrash").addEventListener("click", function () {
-                 clearExistingGraph();
+            clearExistingGraph();
+                changeButtonColor(pageMap[currentPage], "black");
             updateLeftSideInfoBar("dotComCrash");
             showCrashGraph("dotComCrash");
             currentPage = 2;
-            
+            changeButtonColor(pageMap[currentPage], "Red");
 
         }, false);
         document.getElementById("housingCrash").addEventListener("click", function () {
-                 clearExistingGraph();
+            clearExistingGraph();
+                changeButtonColor(pageMap[currentPage], "black");
             updateLeftSideInfoBar("housingCrash");
             showCrashGraph("housingCrash");
             currentPage = 3;
         }, false);
 
         document.getElementById("pandemicCrash").addEventListener("click", function () {
-                 clearExistingGraph();
+            clearExistingGraph();
+                changeButtonColor(pageMap[currentPage], "black");
             updateLeftSideInfoBar("pandemicCrash");
             showCrashGraph("pandemicCrash");
             currentPage = 4;
+            changeButtonColor(pageMap[currentPage], "Red");
         }, false);
 
         document.getElementById("crashCompare").addEventListener("click", function () {
-                   clearExistingGraph();
+            clearExistingGraph();
+              changeButtonColor(pageMap[currentPage], "black");
             updateLeftSideInfoBar("crashCompare");
             showCrashGraph("crashCompare");
             currentPage = 5;
+            changeButtonColor(pageMap[currentPage], "Red");
         }, false);
         document.getElementById("allStatesUER").addEventListener("click", function () {
             clearExistingGraph();
+                changeButtonColor(pageMap[currentPage], "black");
               updateLeftSideInfoBar("All States");
                    d3.csv("UERStatewiseData.csv", function (data) {
                        showGraphState("All States", data);
-                        currentPage = 1;
+                       currentPage = 1;
+                         changeButtonColor(pageMap[currentPage], "Red");
                     })
           }, false);
 
@@ -759,9 +764,9 @@ p {
 
               
 
-                        showAnnotation(600, 80, 770, 200, 450, 150, "1", "African american is highest impacted race in any recession");
-                        showAnnotation(850, 40, 900, 100, 500, 100, "2", "Hispanic-2nd highest vulnerable community in any recession");
-                        showAnnotation(250, 40, 180, 320, 100, 100, "3", "Whites-Managing recession better than others");
+                        showAnnotation(450, 80, 600, 200, 400, 150, "1", "African american is highest impacted race in any recession");
+                        showAnnotation(600, 30, 710, 100, 400, 100, "2", "Latino-2nd highest vulnerable community in any recession");
+                        showAnnotation(180, 40, 150, 320, 100, 100, "3", "Whites-Managing recession better than others");
           
                 }
                 )
@@ -988,8 +993,8 @@ p {
             if (currentPage == 1) {
 
                 showAnnotation(380, 80, 380, 420, 300, 140, "1", "2000 Dot.Com Crash");
-                showAnnotation(600, 80, 600, 420, 600, 140, "2", "2008 Housing Market Crash");
-                showAnnotation(1100, 80, 1100, 420, 1000, 100, "3", "2020 Covid-19 Pandemic");
+                showAnnotation(600, 80, 600, 420, 550, 140, "2", "2008 Housing Market Crash");
+                showAnnotation(860, 80, 860, 420, 740, 130, "3", "2020 Covid-19 Pandemic");
             }
             if (currentPage == 2)
                 showAnnotation(380, 80, 380, 420, 300, 140, "1", "2000 DotCom Crash");
