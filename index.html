@@ -378,9 +378,9 @@ p {
          document.getElementById("next").addEventListener("click", function () {
 
              if (currentPage < 5) {
-                  changeButtonColor(pageMap[currentPage],  "black");
+              //    changeButtonColor(pageMap[currentPage],  "black");
                  currentPage = currentPage + 1;
-                changeButtonColor(pageMap[currentPage], "Red");
+             //   changeButtonColor(pageMap[currentPage], "Red");
                  pageTraversal(currentPage);
                     
              }
@@ -389,16 +389,17 @@ p {
 
            document.getElementById("previous").addEventListener("click", function () {
                if (currentPage > 1) {
-                  changeButtonColor(pageMap[currentPage],  "black");
+              //    changeButtonColor(pageMap[currentPage],  "black");
                    currentPage = currentPage - 1;
                    pageTraversal(currentPage);
-              changeButtonColor(pageMap[currentPage], "Red");
+          //    changeButtonColor(pageMap[currentPage], "Red");
                }
 
         }, false);
 
         function changeButtonColor(idbtn, btncol) {
-        document.getElementById(idbtn).style.color = btncol; 
+           
+     //   document.getElementById(idbtn).style.color = btncol; 
              
         }
 
@@ -438,12 +439,12 @@ p {
         }, false);
         document.getElementById("allStatesUER").addEventListener("click", function () {
             clearExistingGraph();
-                changeButtonColor(pageMap[currentPage], "black");
+            //    changeButtonColor(pageMap[currentPage], "black");
               updateLeftSideInfoBar("All States");
                    d3.csv("UERStatewiseData.csv", function (data) {
                        showGraphState("All States", data);
                        currentPage = 1;
-                         changeButtonColor(pageMap[currentPage], "Red");
+               //          changeButtonColor(pageMap[currentPage], "Red");
                     })
           }, false);
 
@@ -625,20 +626,20 @@ p {
             var infoText = "Paragraph changed!";
             if (inputvalue == "dotComCrash") {
 
-                infoText = " Unemployment Rate during dotcom crash Year 1999-2001";
+                infoText = " Unemployment Rate during the year of dotcom crash (1999-2001)";
             }
             else if (inputvalue == "housingCrash") {
-                infoText = " Unemployment Rate during Housing  crash Year 2006-2009";
+                infoText = " Unemployment Rate during the year of Housing crash (2006-2009)";
             }
 
             else if (inputvalue == "pandemicCrash") {
                 infoText = " Unemployment Rate during Covid pandemic 2019-2020";
             }
             else if (inputvalue == "crashCompare") {
-                 infoText = " Unemployment Rate  comparision in Last 3 major economy down time";
+                 infoText = " Unemployment Rate comparision of Last 3 major economy downturn";
             }
             else
-                infoText = "Past two decades Unemployment Rate by Race and Ethnicity";
+                infoText = "Past two decade's Unemployment Rate by gender and Ethnicity";
 
             document.getElementById("idheader").innerHTML = infoText
 
@@ -764,8 +765,8 @@ p {
 
               
 
-                        showAnnotation(450, 80, 600, 200, 400, 150, "1", "African american is highest impacted race in any recession");
-                        showAnnotation(600, 30, 710, 100, 400, 100, "2", "Latino-2nd highest vulnerable community in any recession");
+                        showAnnotation(450, 80, 600, 200, 400, 150, "1", "African american-The highest impacted race in any recession");
+                        showAnnotation(600, 30, 710, 100, 400, 100, "2", "Latino-2nd highest impacted community in any recession");
                         showAnnotation(180, 40, 150, 320, 100, 100, "3", "Whites-Managing recession better than others");
           
                 }
