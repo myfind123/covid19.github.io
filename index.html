@@ -17,6 +17,7 @@
   padding: 5px;
   text-align: center;
   background: white;
+
 }
 
 .header h1 {
@@ -24,17 +25,19 @@
 }
 
 p {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 #leftbox { 
                 float:left;  
                 background:Red; 
+                color: blue;
                 width:25%; 
                 height:280px; 
                         background: white;
         padding: 10px;
             position: relative;
+            font-size:10px;
             }
 
     .rightbox {
@@ -227,6 +230,12 @@ p {
 .scenebutton{
     width:12px;
 }
+#idheader{
+  
+  color: blue;
+  font-size: 20px;
+
+}
 </style>
 
 
@@ -248,7 +257,7 @@ p {
 
 
     <div id="my_report" align="left">
-        <h1 id="idheader" align="center">Past two decades (1990-2020) UnEmployment Rate by Race and Ethnicity</h1>
+        <h1 id="idheader" align="center" color="blue">Past two decades (1990-2020) Unemployment Rate by Race and Ethnicity</h1>
     </div>
     <div id="colorLegend" class="rightbox">
         <P><b>Select Population Group</b></P>
@@ -280,7 +289,7 @@ p {
         //   var margin = { top: 30, right: 30, bottom: 50, left: 60 },
         var margin = { top: 30, right: 30, bottom: 50, left: 60 },
             width = 960 - margin.left - margin.right,
-            height = 550 - margin.top - margin.bottom;
+            height = 500 - margin.top - margin.bottom;
  
         var labHeight = 50;
         var labRadius = 10;
@@ -476,33 +485,7 @@ p {
                         currentPage = 1;
                     })
           
-          /*clearExistingGraph();
-                    d3.csv("UERStatewiseData.csv", function (data) {
-                        showGraphState(selectedState, data);
-                    })
-                    */
-        /*
-        d3.csv("IndexValue.csv", function (error, data) {
-
-           var selectedState = "";
-            d3.select("#stateSelectButton").selectAll("myOptions")
-                .data(data)
-                .enter()
-                .append("option")
-                .attr("value", function (d) { return d.state; })
-                .text(function (d) { return d.state; });
-
-            d3.select("#stateSelectButton")
-                .on("change", function (d) {
-                    selectedState = d3.select(this).property("value");
-                    clearExistingGraph();
-                    d3.csv("UERStatewiseData.csv", function (data) {
-                        showGraphState(selectedState, data);
-                    })
-
-                });
-
-        });*/
+    
 
         var svg = d3.select("#my_report")
             .append("svg")
@@ -518,10 +501,7 @@ p {
                 .style("opacity", 0);
             return tooltipDiv;
         };
-        //     d3.csv("UERStatewise-4.csv", function (data) {
-     //   d3.csv("UERStatewiseData.csv", function (data) {
-       //     showGraphState("All States", data);
-       // })
+      
 
         function updateGraphByRace(raceid, status) {
     
@@ -653,7 +633,7 @@ p {
                  infoText = " Unemployment Rate  comparision in Last 3 major economy down time";
             }
             else
-                infoText = "Past two decades UnEmployment Rate by Race and Ethnicity";
+                infoText = "Past two decades Unemployment Rate by Race and Ethnicity";
 
             document.getElementById("idheader").innerHTML = infoText
 
